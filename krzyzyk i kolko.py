@@ -4,24 +4,28 @@ pusty = " "
 remis = "Remis"
 liczba_pol = 9
 
+# tworzenie tablicy gry
 def tablica_gry (tablica):
     print(tablica[0], "|", tablica[1], "|", tablica[2])
     print("---------")
     print(tablica[3], "|", tablica[4], "|", tablica[5])
     print("---------")
     print(tablica[6], "|", tablica[7], "|", tablica[8], "\n")
-
+    
+# nowa tablica gry
 def nowa_tablica():
     tablica = []
     for pole in range(liczba_pol):
         tablica.append(pusty)
     return tablica
 
+# wybieranie kto pierwszy zaczyna
 def kto_pierwszy():
     computer = X
     czlowiek = O
     return computer, czlowiek
 
+# dozwolone ruchy w grze
 def dozwolone_ruchy (tablica):
     ruch = []
     for pole in range(liczba_pol):
@@ -29,6 +33,7 @@ def dozwolone_ruchy (tablica):
             ruch.append(pole)
     return ruch
 
+# układ wygrywających lini
 def wygrywajacy_uklad(tablica):
     wygrywajace_linie = (
         (0, 1, 2),
@@ -51,12 +56,14 @@ def wygrywajacy_uklad(tablica):
 
     return None
 
+# wybieranie pola do postawienia swojego znaku
 def zapytaj_o_liczbe(pytanie, niska, wysoka):
     odpowiedz = None
     while odpowiedz not in range(niska, wysoka):
         odpowiedz = int(input(pytanie))
     return odpowiedz
 
+# ruch człowieka przy wybieraniu pola
 def ruch_czlowieka(tablica, czlowiek):
     prawidlowy = dozwolone_ruchy(tablica)
     ruch = None
@@ -67,12 +74,14 @@ def ruch_czlowieka(tablica, czlowiek):
     print("Lepiej...")
     return ruch
 
+# zmiana kolejki
 def zmiana_gracz(zmiana):
     if zmiana == X:
         return O
     else:
         return X
 
+# ruchy komputera
 def ruch_computera(tablica, computer, czlowiek):
     # kopię roboczą, ponieważ funkcja będzie zmieniać listę
     tablica = tablica[:]
@@ -104,6 +113,7 @@ def ruch_computera(tablica, computer, czlowiek):
             print(ruch)
             return ruch
 
+# podziekowania dla zwycięzcy
 def zwyciezca(wygrany, computer, czlowiek):
     if wygrany != remis:
         print(wygrany, "jest zwycięzcą!\n")
@@ -119,6 +129,7 @@ def zwyciezca(wygrany, computer, czlowiek):
     elif wygrany == remis:
         print("Mamy remis")
 
+# gra właściwa
 def gra():
     computer, czlowiek = kto_pierwszy()
     zmiana = X
